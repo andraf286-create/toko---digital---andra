@@ -1,3 +1,6 @@
+
+import React from 'react';
+import mascotImg from '../assets/images/mascot_bear_tiger_hero_1792993941291.jpg';
 import { Sun, Moon, ShoppingBag, Search, Sparkles, User, ShieldCheck, MessageCircle, Share2 } from 'lucide-react';
 import { useTheme } from '../context/ThemeContext';
 
@@ -30,7 +33,7 @@ export const Header: React.FC<HeaderProps> = ({
           <a href="#" className="flex items-center gap-2.5 group">
             <div className="relative w-10 h-10 rounded-full overflow-hidden border-2 border-indigo-500/60 shadow-md group-hover:border-purple-400 transition-all shrink-0">
               <img
-                src="/src/assets/images/mascot_bear_tiger_hero_1792993941291.jpg"
+                src={mascotImg}
                 alt="Yuraa Mascot Beruang x Harimau"
                 className="w-full h-full object-cover"
                 referrerPolicy="no-referrer"
