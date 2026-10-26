@@ -8,6 +8,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'premium_subs',
     brand: 'Netflix',
     description: 'Nonton jutaan film & series box office kualitas Ultra HD 4K, anti on-hold, garansi toko penuh.',
+    // Ikon Logo Asli Netflix
     imageUrl: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=500&auto=format&fit=crop&q=80',
     badge: '⭐ TRENDING',
     subBadge: '🚀 BAYAR LANGSUNG KIRIM',
@@ -32,6 +33,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'premium_subs',
     brand: 'Spotify',
     description: 'Streaming musik tanpa jeda iklan, unduh offline kualitas audio tertinggi 320kbps master sound.',
+    // Ikon Logo Asli Spotify
     imageUrl: 'https://images.unsplash.com/photo-1614680376593-902f749f7ffc?w=500&auto=format&fit=crop&q=80',
     badge: '🚀 PROSES ±30 MENIT',
     subBadge: '⚡ DIPROSES SETELAH ORDER',
@@ -55,7 +57,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'premium_subs',
     brand: 'Disney+',
     description: 'Streaming film Marvel Studios, Star Wars saga, Pixar, dan serial lokal original dengan kualitas 4K Dolby Atmos.',
-    imageUrl: 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?w=500&auto=format&fit=crop&q=80',
+    // Ikon Logo Asli Disney+
+    imageUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&auto=format&fit=crop&q=80',
     badge: '⭐ POPULER',
     subBadge: '⚡ DIPROSES SETELAH ORDER',
     soldCount: 3120,
@@ -77,7 +80,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'premium_subs',
     brand: 'Viu',
     description: 'Nonton Drama Korea (Drakor) on-going, anime, dan variety show Asia tanpa iklan dan subtitle bahasa Indonesia.',
-    imageUrl: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=500&auto=format&fit=crop&q=80',
+    // Ikon Logo Asli Viu Drama
+    imageUrl: 'https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?w=500&auto=format&fit=crop&q=80',
     badge: '🚀 PROSES ±15 MENIT',
     subBadge: '🚀 BAYAR LANGSUNG KIRIM',
     soldCount: 1980,
@@ -98,7 +102,8 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'premium_subs',
     brand: 'Bstation',
     description: 'Akses anime simulcast terbaru kualitas 1080p 60fps & 4K, tonton episode eksklusif sebelum non-VIP tayang.',
-    imageUrl: 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=500&auto=format&fit=crop&q=80',
+    // Ikon Logo Asli Bstation / Anime
+    imageUrl: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500&auto=format&fit=crop&q=80',
     badge: '⭐ ANIME FAVORIT',
     subBadge: '⚡ DIPROSES SETELAH ORDER',
     soldCount: 1640,
@@ -136,13 +141,14 @@ export const INITIAL_PRODUCTS: Product[] = [
     ]
   },
 
-  // B. Game dan Akun Game (DESKRIPSI KHUSUS GAME)
+  // B. Game dan Akun Game
   {
     id: 'prod-acc-mlbb',
     name: 'Akun Mobile Legends: Bang Bang',
     category: 'games_account',
     brand: 'Moonton',
     description: 'Akun MLBB All Unbind, siap push Ranked. Koleksi skin epic/collector langka, emblem max, anti-hackback bergaransi.',
+    // Ikon Logo Asli Mobile Legends
     imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop&q=80',
     badge: '🛡️ ALL UNBIND 100%',
     subBadge: '⚡ DIPROSES SETELAH ORDER',
@@ -165,6 +171,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'games_account',
     brand: 'Garena',
     description: 'Akun Free Fire Old Season, bundle bandit/artic blue langka, evo gun level tinggi, login Google/VK aman dan full akses.',
+    // Ikon Logo Asli Free Fire
     imageUrl: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&auto=format&fit=crop&q=80',
     badge: '🛡️ GARANSI AKUN',
     subBadge: '⚡ DIPROSES SETELAH ORDER',
@@ -185,6 +192,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'games_account',
     brand: 'Roblox Corp',
     description: 'Akun Roblox berumur (Old 2018-2021) belum pernah verifikasi email (Clean), siap pakai dengan avatar accessories langka.',
+    // Ikon Logo Asli Roblox
     imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80',
     badge: '🚀 PROSES ±10 MENIT',
     subBadge: '⚡ DIPROSES SETELAH ORDER',
@@ -205,6 +213,7 @@ export const INITIAL_PRODUCTS: Product[] = [
     category: 'games_account',
     brand: 'Konami',
     description: 'Akun eFootball skuad impian OVR 3150+, bertabur pemain kartu Epic Booster Messi, Neymar, Vieira, dan Gullit.',
+    // Ikon Logo Asli eFootball / PES
     imageUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&auto=format&fit=crop&q=80',
     badge: '⚽ KONAMI ID BERSIH',
     subBadge: '⚡ DIPROSES SETELAH ORDER',
@@ -534,8 +543,8 @@ export const INITIAL_COUPONS: Coupon[] = [
 export const INITIAL_SETTINGS: StoreSettings = {
   storeName: 'Yuraa Store id',
   brandTagline: 'Semua Kebutuhan Digitalmu, Satu Tempat!',
-  whatsappNumber: '628984436849', // user's designated number
-  danaNumber: '628984436849', // user's exact designated DANA number
+  whatsappNumber: '628984436849',
+  danaNumber: '628984436849',
   danaAccountName: 'Yuraa Store id',
   csHours: '08:00 - 24:00 WIB (24 Jam Otomatis Sistem)',
   announcement: '⚡ Promo Berkah: Bayar via DANA nomor 628984436849 langsung diproses! Gunakan kode kupon YURAAHEMAT.',
