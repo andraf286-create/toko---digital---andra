@@ -270,11 +270,21 @@ export const storeService = {
     const randomSuffix = Math.floor(1000 + Math.random() * 9000);
     const orderId = `YUR-${dateStr}-${randomSuffix}`;
 
+    // Cek apakah ada produk langganan (subscription) untuk set masa aktif 30 hari otomatis
+    const hasSubscription = orderData.items.some(item => item.productCategory === 'premium_subs');
+    let expiresAt: string | undefined = undefined;
+    if (hasSubscription) {
+      const expDate = new Date();
+      expDate.setDate(expDate.getDate() + 30);
+      expiresAt = expDate.toISOString();
+    }
+
     const newOrder: Order = {
       ...orderData,
       id: orderId,
       createdAt: new Date().toISOString(),
-      status: 'PENDING'
+      status: 'PENDING',
+      expiresAt // Tanggal kedaluwarsa untuk sistem pengingat sisa 5 hari
     };
 
     const orders = this.getOrders();
@@ -295,6 +305,14 @@ export const storeService = {
         ...fulfillment,
         processedAt: new Date().toISOString()
       };
+      
+      // Jika pesanan sukses dan mengandung produk langganan, pastikan expiresAt aktif 30 hari ke depan
+      const hasSub = orders[index].items.some(i => i.productCategory === 'premium_subs');
+      if (hasSub && !orders[index].expiresAt) {
+        const exp = new Date();
+        exp.setDate(exp.getDate() + 30);
+        orders[index].expiresAt = exp.toISOString();
+      }
     }
 
     this.saveOrders(orders);
@@ -335,9 +353,7 @@ export const storeService = {
     credentials.unshift(newCred);
     this.saveCredentials(credentials);
 
-    // Sync product stock if applicable
     this.syncProductStockWithCredentials(data.productId, data.variantId);
-
     return newCred;
   },
 
@@ -352,7 +368,6 @@ export const storeService = {
     const newCreds: AccountCredential[] = [];
 
     lines.forEach((line) => {
-      // Formats supported: email:pass, email|pass, email pass, or email:pass:pin:notes
       const parts = line.split(/[|;:,]/).map(p => p.trim());
       if (parts.length >= 2) {
         const email = parts[0];
@@ -442,7 +457,6 @@ export const storeService = {
   // ORDER ARCHIVE (SOFT-DELETE) & STRICT RBAC ACCESS CONTROL
   getArchivedOrders(callerRole?: AdminRole): ArchivedOrder[] {
     const currentRole = callerRole || this.getAdminRole();
-    // Strict RBAC: Only 'owner' role can view archived orders
     if (currentRole !== 'owner') {
       return [];
     }
@@ -459,7 +473,6 @@ export const storeService = {
     return INITIAL_DELETED_LOGS;
   },
 
-  // Backwards compatibility alias
   getDeletedOrders(callerRole?: AdminRole): ArchivedOrder[] {
     return this.getArchivedOrders(callerRole);
   },
@@ -484,11 +497,9 @@ export const storeService = {
     const orderToArchive = orders.find(o => o.id === orderId);
     if (!orderToArchive) return undefined;
 
-    // Remove from active orders (Soft Delete)
     const remainingOrders = orders.filter(o => o.id !== orderId);
     this.saveOrders(remainingOrders);
 
-    // Prepare archive record
     const role = callerRole || this.getAdminRole() || 'owner';
     const name = callerName || (role === 'owner' ? 'Owner Yuraa Store' : 'Staff CS Operator');
     const item = orderToArchive.items[0];
@@ -549,14 +560,12 @@ export const storeService = {
     const target = archives.find(a => a.id === archiveId);
     if (!target) return false;
 
-    // Restore back to active orders
     const orders = this.getOrders();
     if (!orders.some(o => o.id === target.originalOrder.id)) {
       orders.unshift(target.originalOrder);
       this.saveOrders(orders);
     }
 
-    // Remove from OrderArchive
     const updatedArchives = archives.filter(a => a.id !== archiveId);
     localStorage.setItem(DELETED_ORDERS_KEY, JSON.stringify(updatedArchives));
     window.dispatchEvent(new Event('yuraa_data_updated'));
@@ -607,25 +616,21 @@ export const storeService = {
     this.clearAllArchivedOrders('owner');
   },
 
-  // PAYMENT SIMULATION / WEBHOOK SIMULATOR
+  // PAYMENT SIMULATION / WEBHOOK SIMULATOR & EMAIL AUTO-DISPATCH
   async simulatePaymentWebhook(orderId: string): Promise<Order | undefined> {
     const order = this.getOrderById(orderId);
     if (!order) return undefined;
 
-    // Step 1: Status becomes PAID
     this.updateOrderStatus(orderId, 'PAID');
     window.dispatchEvent(new CustomEvent('yuraa_order_status_change', { detail: { orderId, status: 'PAID' } }));
 
-    // Short simulated processing delay with digital provider
     await new Promise(resolve => setTimeout(resolve, 1500));
 
-    // Step 2: Status becomes PROCESSING
     this.updateOrderStatus(orderId, 'PROCESSING');
     window.dispatchEvent(new CustomEvent('yuraa_order_status_change', { detail: { orderId, status: 'PROCESSING' } }));
 
     await new Promise(resolve => setTimeout(resolve, 2000));
 
-    // Step 3: Check if store owner has restocked available account credentials
     const item = order.items[0];
     let fulfillment: FulfillmentInfo = {
       processedAt: new Date().toISOString()
@@ -644,13 +649,13 @@ export const storeService = {
       const snNumber = 'SN-' + Date.now().toString().slice(-8) + Math.floor(1000 + Math.random() * 9000);
       fulfillment = {
         serialNumber: snNumber,
-        adminNotes: `Pengisian sukses ke User ID: ${item.customInputs.userId || '-'} (${item.customInputs.zoneId || ''}). Item telah masuk secara otomatis.`
+        adminNotes: `Pengisian sukses ke User ID: ${item.customInputs?.userId || '-'} (${item.customInputs?.zoneId || ''}). Item telah masuk secara otomatis.`
       };
     } else if (item.productCategory === 'pulsa_data') {
       const snNumber = 'SN-TELCO-' + Date.now().toString().slice(-9);
       fulfillment = {
         serialNumber: snNumber,
-        adminNotes: `Paket/Pulsa sukses diisi ke nomor ${item.customInputs.phoneNumber}. Kuota/Pulsa aktif.`
+        adminNotes: `Paket/Pulsa sukses diisi ke nomor ${item.customInputs?.phoneNumber || '-'}. Kuota/Pulsa aktif.`
       };
     } else if (item.productCategory === 'premium_subs') {
       const emailRandom = `yuraa.cust${Math.floor(100 + Math.random() * 900)}@premiumyuraa.id`;
@@ -667,7 +672,6 @@ export const storeService = {
         adminNotes: 'Redeem kode di menu akun Anda sebelum masa kedaluwarsa 12 bulan.'
       };
     } else {
-      // games_account fallback
       fulfillment = {
         credentials: `Akun Login: mlbb.sultan${Math.floor(100 + Math.random() * 900)}@mail.com\nPassword: AkunMoonton2026!\nEmail Pemulihan: Diserahkan Full Access`,
         adminNotes: 'Harap segera kaitkan nomor HP dan ganti kata sandi setelah menerima akun.'
@@ -675,6 +679,14 @@ export const storeService = {
     }
 
     const updated = this.updateOrderStatus(orderId, 'SUCCESS', fulfillment);
+    
+    // Simulasi Pengiriman Email Otomatis (jika email pelanggan tersedia)
+    const targetEmail = order.customerEmail || order.items[0]?.customInputs?.customerEmail;
+    if (targetEmail && fulfillment.credentials) {
+      console.log(`[Email Service] Mengirim otomatis detail akun ke email: ${targetEmail}`);
+      console.log(`[Email Content] Produk: ${item.productName}\n${fulfillment.credentials}`);
+    }
+
     window.dispatchEvent(new CustomEvent('yuraa_order_status_change', { detail: { orderId, status: 'SUCCESS' } }));
     return updated;
   },
