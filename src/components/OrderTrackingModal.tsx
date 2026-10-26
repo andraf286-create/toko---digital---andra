@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { X, Search, ShieldCheck, CheckCircle2, Clock, AlertTriangle, RefreshCw, Copy, Check, ArrowRight } from 'lucide-react';
+import { X, Search, ShieldCheck, CheckCircle2, Clock, AlertTriangle, RefreshCw, Copy, Check, ArrowRight, PackageCheck, CreditCard, Loader2 } from 'lucide-react';
 import { storeService } from '../services/storeService';
 import { Order } from '../types';
 
@@ -52,6 +52,58 @@ export const OrderTrackingModal: React.FC<OrderTrackingModalProps> = ({
       default:
         return <span className="px-2 py-0.5 rounded-full bg-rose-500/20 text-rose-400 text-[10px] font-bold">GAGAL</span>;
     }
+  };
+
+  // Komponen Visual Progress Bar Status Pesanan
+  const renderProgressBar = (status: string) => {
+    const steps = [
+      { key: 'PENDING', label: 'Menunggu', icon: Clock },
+      { key: 'PAID', label: 'Dibayar', icon: CreditCard },
+      { key: 'PROCESSING', label: 'Diproses', icon: Loader2 },
+      { key: 'SUCCESS', label: 'Selesai', icon: PackageCheck }
+    ];
+
+    // Tentukan urutan index status aktif
+    const getStepIndex = (st: string) => {
+      switch (st) {
+        case 'PENDING': return 0;
+        case 'PAID': return 1;
+        case 'PROCESSING': return 2;
+        case 'SUCCESS': return 3;
+        default: return 0;
+      }
+    };
+
+    const currentIndex = getStepIndex(status);
+
+    return (
+      <div className="mt-3 pt-3 border-t border-slate-800/80">
+        <div className="flex items-center justify-between relative">
+          {steps.map((step, idx) => {
+            const isCompleted = idx <= currentIndex;
+            const isCurrent = idx === currentIndex;
+            const StepIcon = step.icon;
+
+            return (
+              <div key={step.key} className="flex flex-col items-center relative z-10 flex-1">
+                <div className={`w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold transition-all ${
+                  isCurrent 
+                    ? 'bg-blue-600 text-white shadow-[0_0_12px_rgba(59,130,246,0.6)] ring-4 ring-blue-500/20 animate-pulse' 
+                    : isCompleted 
+                    ? 'bg-emerald-600 text-white' 
+                    : 'bg-slate-800 text-slate-500 border border-slate-700'
+                }`}>
+                  <StepIcon className={`w-3.5 h-3.5 ${isCurrent && step.key === 'PROCESSING' ? 'animate-spin' : ''}`} />
+                </div>
+                <span className={`text-[10px] mt-1.5 font-medium ${isCurrent ? 'text-blue-400 font-bold' : isCompleted ? 'text-slate-300' : 'text-slate-500'}`}>
+                  {step.label}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -131,6 +183,9 @@ export const OrderTrackingModal: React.FC<OrderTrackingModalProps> = ({
                         Rp {ord.total.toLocaleString('id-ID')}
                       </span>
                     </div>
+
+                    {/* Visual Progress Bar Status */}
+                    {renderProgressBar(ord.status)}
 
                     <div className="flex items-center justify-between pt-2 border-t border-slate-800 text-[10px] text-slate-400">
                       <span>{new Date(ord.createdAt).toLocaleDateString('id-ID', { dateStyle: 'medium', timeStyle: 'short' })}</span>
