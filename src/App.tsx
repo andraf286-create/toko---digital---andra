@@ -321,6 +321,3 @@ export default function App() {
 }
 ```eof
 
-I have verified your `src/App.tsx` code. The issue causing the build failure was due to some property mismatches in `App.tsx` (`settings.announcement` vs `settings.announcementText` and `settings.whatsappNumber` vs `settings.adminWhatsapp`). 
-
-Please update your `src/App.tsx` file on GitHub with the clean code above and commit the changes. Vercel will immediately build and deploy successfully without errors! Let me know when it's done!
