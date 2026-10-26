@@ -111,11 +111,11 @@ export const INITIAL_PRODUCTS: Product[] = [
   },
   {
     id: 'bstation-premium',
-    title: 'Bstation (Bilibili) VIP',
+    title: 'Anime Bstation / Bilibili VIP',
     subtitle: 'Nonton Anime HD 1080P/4K Subtitle Indonesia Termurah',
     category: 'PREMIUM_SUBS',
     description: 'Platform streaming anime terbesar. Nikmati kualitas streaming hingga 4K, akses awal episode anime ongoing terbaru, dan sound effect surround sound.',
-    price: 15000,
+    price: 16500,
     originalPrice: 35000,
     image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80',
     banner: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=1200&auto=format&fit=crop&q=80',
@@ -125,12 +125,36 @@ export const INITIAL_PRODUCTS: Product[] = [
     badge: 'ANIME SPECIAL',
     processType: 'AUTO',
     variants: [
-      { id: 'bstation-1m', name: '1 Bulan - Premium VIP Slot', price: 15000, stock: 10, duration: '30 Hari' },
+      { id: 'bstation-1m', name: '1 Bulan - Premium VIP Slot', price: 16500, stock: 10, duration: '30 Hari' },
       { id: 'bstation-1y', name: '1 Tahun - Premium VIP Private', price: 110000, stock: 8, duration: '365 Hari' }
     ],
     instructions: [
       'Akun VIP siap pakai dikirimkan otomatis beserta petunjuk login.',
       'Dilarang membagikan akun ke pengguna lain.'
+    ]
+  },
+  {
+    id: 'canva-pro',
+    title: 'Canva Pro Edu & Lifetime Team',
+    subtitle: 'Akses Semua Fitur Pro, Template, & Element Tanpa Batas',
+    category: 'PREMIUM_SUBS',
+    description: 'Buka semua fitur premium Canva seperti Hapus Latar Belakang (Background Remover), Brand Kit, jutaan elemen & foto premium, serta ekspor format SVG/PDF Print.',
+    price: 9500,
+    originalPrice: 95000,
+    image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1200&auto=format&fit=crop&q=80',
+    stock: 50,
+    salesCount: 8930,
+    rating: 5.0,
+    badge: 'BEST SELLER',
+    processType: 'AUTO',
+    variants: [
+      { id: 'canva-1y', name: 'Canva Pro - Invite Email Akun Sendiri (1 Tahun)', price: 9500, stock: 30, duration: '1 Tahun' },
+      { id: 'canva-lt', name: 'Canva Pro - Garansi Lifetime Member', price: 19500, stock: 20, duration: 'Selamanya' }
+    ],
+    instructions: [
+      'Masukkan email Canva Kakak saat memesan.',
+      'Undangan tim (Team Invite Link) akan langsung dikirimkan ke email atau WhatsApp Kakak.'
     ]
   },
 
@@ -350,3 +374,4 @@ export const INITIAL_SETTINGS: StoreSettings = {
     'https://images.unsplash.com/photo-1614680376593-902f749f7edc?w=1200&auto=format&fit=crop&q=80'
   ]
 };
+``eof
