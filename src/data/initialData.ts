@@ -1,572 +1,352 @@
 import { Product, Coupon, StoreSettings } from '../types';
 
 export const INITIAL_PRODUCTS: Product[] = [
-  // A. Akun dan Langganan Premium
+  // ----------------------------------------------------
+  // 1. STREAMING & ENTERTAINMENT
+  // ----------------------------------------------------
   {
-    id: 'prod-netflix',
-    name: 'Netflix Premium UHD 4K',
-    category: 'premium_subs',
-    brand: 'Netflix',
-    description: 'Nonton jutaan film & series box office kualitas Ultra HD 4K, anti on-hold, garansi toko penuh.',
-    // Ikon Logo Asli Netflix
-    imageUrl: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=500&auto=format&fit=crop&q=80',
-    badge: '⭐ TRENDING',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 7849,
-    stockLeft: 15,
-    isPopular: true,
-    isPromo: true,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Masukkan email dan WhatsApp Anda. Detail login akun (email, password, nomor profil, dan PIN) dikirim langsung ke WhatsApp.',
-    deliveryType: 'instant',
+    id: 'netflix-premium',
+    title: 'Netflix Premium UHD 4K',
+    subtitle: 'Akun Private / Shared Profile 4K UHD Anti-Limit',
+    category: 'PREMIUM_SUBS',
+    description: 'Nikmati ribuan film dan serial TV dengan kualitas resolusi tertinggi 4K Ultra HD. Bebas iklan, support semua device (Smart TV, HP, Laptop, Tablet). Garansi penuh selama masa aktif.',
+    price: 28500,
+    originalPrice: 42750,
+    image: 'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?w=1200&auto=format&fit=crop&q=80',
+    stock: 15,
+    salesCount: 7849,
+    rating: 4.9,
+    badge: 'TRENDING',
+    processType: 'AUTO',
     variants: [
-      { id: 'nf-1p-1m', name: 'Sharing Profile (1 Bulan - 1 Profil 2 User)', price: 28500, originalPrice: 42750, stock: 15 },
-      { id: 'nf-pv-1m', name: 'Private Profile (1 Bulan - 1 Profil 1 User Bebas Limit)', price: 42000, originalPrice: 65000, stock: 8 },
-      { id: 'nf-full-1m', name: 'Private Account Full (5 Profil Milik Sendiri)', price: 139000, originalPrice: 186000, stock: 5 },
-      { id: 'nf-1p-3m', name: 'Sharing Profile (3 Bulan Garansi Penuh)', price: 79000, originalPrice: 120000, stock: 10 }
+      { id: 'nf-1m-1u', name: '1 Bulan - 1 Profile (Shared 1 User)', price: 28500, stock: 10, duration: '30 Hari' },
+      { id: 'nf-1m-pvt', name: '1 Bulan - Private (Full Account 5 Profile)', price: 135000, stock: 5, duration: '30 Hari' },
+      { id: 'nf-3m-1u', name: '3 Bulan - 1 Profile (Shared 1 User)', price: 79000, stock: 8, duration: '90 Hari' },
+      { id: 'nf-1y-pvt', name: '1 Tahun - Private Account Garansi Full', price: 950000, stock: 2, duration: '365 Hari' }
+    ],
+    instructions: [
+      'Email & PIN Profile akan dikirimkan otomatis di halaman invoice / WhatsApp.',
+      'Gunakan profile sesuai nomor slot yang diberikan.',
+      'Dilarang mengubah password, email, atau pengaturan pembayaran akun.'
     ]
   },
   {
-    id: 'prod-spotify',
-    name: 'Spotify Premium Individual',
-    category: 'premium_subs',
-    brand: 'Spotify',
-    description: 'Streaming musik tanpa jeda iklan, unduh offline kualitas audio tertinggi 320kbps master sound.',
-    // Ikon Logo Asli Spotify
-    imageUrl: 'https://images.unsplash.com/photo-1614680376593-902f749f7ffc?w=500&auto=format&fit=crop&q=80',
-    badge: '🚀 PROSES ±30 MENIT',
-    subBadge: '⚡ DIPROSES SETELAH ORDER',
-    soldCount: 4210,
-    stockLeft: 25,
-    isPopular: true,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Bisa perpanjang akun Spotify pribadi atau terima akun baru siap pakai bergaransi.',
-    deliveryType: 'instant',
+    id: 'spotify-premium',
+    title: 'Spotify Premium Individual',
+    subtitle: 'Mendengarkan Musik Bebas Iklan & Download Offline',
+    category: 'PREMIUM_SUBS',
+    description: 'Dengarkan lagu favorit tanpa gangguan iklan, bebas skip lagu sepuasnya, kualitas audio tertinggi 320kbps, dan fitur download musik offline.',
+    price: 18500,
+    originalPrice: 38000,
+    image: 'https://images.unsplash.com/photo-1614680376593-902f749f7edc?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?w=1200&auto=format&fit=crop&q=80',
+    stock: 25,
+    salesCount: 4210,
+    rating: 4.8,
+    badge: 'PROSES ±30 MENIT',
+    processType: 'MANUAL',
     variants: [
-      { id: 'sp-1m', name: 'Spotify Individual (1 Bulan Garansi Penuh)', price: 18500, originalPrice: 38000, stock: 50 },
-      { id: 'sp-2m', name: 'Spotify Individual (2 Bulan Hemat)', price: 34000, originalPrice: 65000, stock: 25 },
-      { id: 'sp-3m', name: 'Spotify Individual (3 Bulan Anti Drop)', price: 48000, originalPrice: 95000, stock: 30 },
-      { id: 'sp-fam-1m', name: 'Spotify Family Invite Link Resmi', price: 12000, originalPrice: 25000, stock: 40 }
+      { id: 'spot-1m-plan', name: '1 Bulan - Individual Plan (Upgrade Akun Sendiri)', price: 18500, stock: 15, duration: '30 Hari' },
+      { id: 'spot-2m-fam', name: '2 Bulan - Family Invite Slot', price: 25000, stock: 10, duration: '60 Hari' },
+      { id: 'spot-6m-ind', name: '6 Bulan - Private Premium Individual', price: 98000, stock: 5, duration: '180 Hari' },
+      { id: 'spot-1y-ind', name: '1 Tahun - Private Premium Individual', price: 175000, stock: 3, duration: '365 Hari' }
+    ],
+    instructions: [
+      'Kirimkan email & password akun Spotify Kakak di catatan order / admin WhatsApp.',
+      'Atau pilih opsi link invite Family jika ingin bergabung via link.',
+      'Proses pengerjaan cepat 5 - 30 menit pada jam operasional.'
     ]
   },
   {
-    id: 'prod-disney',
-    name: 'Disney+ Hotstar Premium',
-    category: 'premium_subs',
-    brand: 'Disney+',
-    description: 'Streaming film Marvel Studios, Star Wars saga, Pixar, dan serial lokal original dengan kualitas 4K Dolby Atmos.',
-    // Ikon Logo Asli Disney+
-    imageUrl: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=500&auto=format&fit=crop&q=80',
-    badge: '⭐ POPULER',
-    subBadge: '⚡ DIPROSES SETELAH ORDER',
-    soldCount: 3120,
-    stockLeft: 18,
-    isPopular: true,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'phoneNumber'],
-    guideText: 'Kirimkan nomor telepon terdaftar Disney+ Anda untuk verifikasi OTP resmi aktivasi paket.',
-    deliveryType: 'manual_30m',
+    id: 'disney-hotstar',
+    title: 'Disney+ Hotstar Premium',
+    subtitle: 'Akses Marvel, Disney, Pixar, & Film Indonesia Terbaik',
+    category: 'PREMIUM_SUBS',
+    description: 'Nonton blockbuster Hollywood, Marvel Studios, Star Wars, Disney+ Originals, serta film-film bioskop Indonesia eksklusif dalam resolusi HD/4K.',
+    price: 27000,
+    originalPrice: 49000,
+    image: 'https://images.unsplash.com/photo-1536440136628-849c177e76a1?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1489599849927-2ee91cede3ba?w=1200&auto=format&fit=crop&q=80',
+    stock: 20,
+    salesCount: 3120,
+    rating: 4.9,
+    badge: 'POPULER',
+    processType: 'MANUAL',
     variants: [
-      { id: 'dn-basic-1m', name: '1 Bulan Basic Plan (1 Layar Full HD)', price: 27000, originalPrice: 39000, stock: 20 },
-      { id: 'dn-prem-1m', name: '1 Bulan Premium Plan 4K (Sharing 1 User)', price: 38000, originalPrice: 65000, stock: 18 },
-      { id: 'dn-prem-3m', name: '3 Bulan Premium Plan 4K Sharing', price: 95000, originalPrice: 150000, stock: 12 }
+      { id: 'disney-1m', name: '1 Bulan - Premium Solo / Private Number', price: 27000, stock: 12, duration: '30 Hari' },
+      { id: 'disney-3m', name: '3 Bulan - Pack Premium Full', price: 75000, stock: 5, duration: '90 Hari' },
+      { id: 'disney-1y', name: '1 Tahun - Premium Plan (Semua Device)', price: 260000, stock: 3, duration: '365 Hari' }
+    ],
+    instructions: [
+      'Login menggunakan nomor HP yang terdaftar saat order.',
+      'Kode OTP akan dikirimkan oleh Admin via WhatsApp saat proses login.',
+      'Mendukung TV, Ponsel, Tablet, dan Laptop.'
     ]
   },
   {
-    id: 'prod-viu',
-    name: 'Viu Premium VIP',
-    category: 'premium_subs',
-    brand: 'Viu',
-    description: 'Nonton Drama Korea (Drakor) on-going, anime, dan variety show Asia tanpa iklan dan subtitle bahasa Indonesia.',
-    // Ikon Logo Asli Viu Drama
-    imageUrl: 'https://images.unsplash.com/photo-1516251193007-45ef944ab0c6?w=500&auto=format&fit=crop&q=80',
-    badge: '🚀 PROSES ±15 MENIT',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 1980,
-    stockLeft: 30,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Akun private atau aktivasi akun Anda sendiri dengan tautan VIP resmi.',
-    deliveryType: 'instant',
+    id: 'viu-premium',
+    title: 'Viu Premium VIP',
+    subtitle: 'Drama Korea, Anime, & Drama Asia Sub Indo Eksklusif',
+    category: 'PREMIUM_SUBS',
+    description: 'Streaming Drama Korea terbaru yang tayang bersamaan dengan Korea (Simulcast), Variety Show Asia, dan Film Asia sub Indo tanpa iklan.',
+    price: 12000,
+    originalPrice: 30000,
+    image: 'https://images.unsplash.com/photo-1578022761797-b8636ac1773c?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=1200&auto=format&fit=crop&q=80',
+    stock: 30,
+    salesCount: 5410,
+    rating: 4.8,
+    badge: 'BAYAR LANGSUNG KIRIM',
+    processType: 'AUTO',
     variants: [
-      { id: 'viu-1m', name: 'Viu VIP 1 Bulan (Private Account)', price: 12000, originalPrice: 25000, stock: 40 },
-      { id: 'viu-3m', name: 'Viu VIP 3 Bulan (Private Account)', price: 29000, originalPrice: 55000, stock: 30 },
-      { id: 'viu-6m', name: 'Viu VIP 6 Bulan (Private Account)', price: 49000, originalPrice: 90000, stock: 20 }
+      { id: 'viu-1m', name: '1 Bulan - VIP Private Account', price: 12000, stock: 20, duration: '30 Hari' },
+      { id: 'viu-6m', name: '6 Bulan - VIP Private Account', price: 35000, stock: 7, duration: '180 Hari' },
+      { id: 'viu-1y', name: '1 Tahun - VIP Private Account', price: 60000, stock: 3, duration: '365 Hari' }
+    ],
+    instructions: [
+      'Email & Password akun Viu VIP langsung aktif dan dikirim otomatis.',
+      'Bisa dipakai di Android, iOS, maupun Smart TV.'
     ]
   },
   {
-    id: 'prod-bstation',
-    name: 'Anime Bstation / Bilibili VIP',
-    category: 'premium_subs',
-    brand: 'Bstation',
-    description: 'Akses anime simulcast terbaru kualitas 1080p 60fps & 4K, tonton episode eksklusif sebelum non-VIP tayang.',
-    // Ikon Logo Asli Bstation / Anime
-    imageUrl: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500&auto=format&fit=crop&q=80',
-    badge: '⭐ ANIME FAVORIT',
-    subBadge: '⚡ DIPROSES SETELAH ORDER',
-    soldCount: 1640,
-    stockLeft: 22,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Kode voucher redeem atau akun VIP private langsung login.',
-    deliveryType: 'voucher_code',
+    id: 'bstation-premium',
+    title: 'Bstation (Bilibili) VIP',
+    subtitle: 'Nonton Anime HD 1080P/4K Subtitle Indonesia Termurah',
+    category: 'PREMIUM_SUBS',
+    description: 'Platform streaming anime terbesar. Nikmati kualitas streaming hingga 4K, akses awal episode anime ongoing terbaru, dan sound effect surround sound.',
+    price: 15000,
+    originalPrice: 35000,
+    image: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=1200&auto=format&fit=crop&q=80',
+    stock: 18,
+    salesCount: 1950,
+    rating: 4.9,
+    badge: 'ANIME SPECIAL',
+    processType: 'AUTO',
     variants: [
-      { id: 'bili-1m', name: 'Bstation VIP 1 Bulan (Akun Private)', price: 16500, originalPrice: 30000, stock: 35 },
-      { id: 'bili-3m', name: 'Bstation VIP 3 Bulan (Akun Private)', price: 42000, originalPrice: 75000, stock: 22 },
-      { id: 'bili-1y', name: 'Bstation VIP 1 Tahun (Super Hemat)', price: 145000, originalPrice: 250000, stock: 10 }
-    ]
-  },
-  {
-    id: 'prod-canva',
-    name: 'Canva Pro Edu & Lifetime Team',
-    category: 'premium_subs',
-    brand: 'Canva',
-    description: 'Desain tanpa batas dengan akses 100+ juta aset grafis, foto premium, Magic Resize, dan Brand Kit lengkap.',
-    imageUrl: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ INSTANT INVITE',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 5240,
-    stockLeft: 60,
-    isPopular: true,
-    inStock: true,
-    requiredFields: ['email', 'whatsappNumber'],
-    guideText: 'Cukup masukkan email akun Canva Anda. Undangan Pro Team resmi langsung terkirim ke kotak masuk email Anda.',
-    deliveryType: 'instant',
-    variants: [
-      { id: 'canva-1m', name: 'Canva Pro 1 Bulan Garansi', price: 9500, originalPrice: 20000, stock: 80 },
-      { id: 'canva-1y', name: 'Canva Pro 1 Tahun (Garansi 12 Bulan)', price: 29000, originalPrice: 65000, stock: 60 },
-      { id: 'canva-lt', name: 'Canva Pro Lifetime (Akun Team Edu)', price: 45000, originalPrice: 99000, stock: 40 }
+      { id: 'bstation-1m', name: '1 Bulan - Premium VIP Slot', price: 15000, stock: 10, duration: '30 Hari' },
+      { id: 'bstation-1y', name: '1 Tahun - Premium VIP Private', price: 110000, stock: 8, duration: '365 Hari' }
+    ],
+    instructions: [
+      'Akun VIP siap pakai dikirimkan otomatis beserta petunjuk login.',
+      'Dilarang membagikan akun ke pengguna lain.'
     ]
   },
 
-  // B. Game dan Akun Game
+  // ----------------------------------------------------
+  // 2. VOUCHER & TOP UP GAME
+  // ----------------------------------------------------
   {
-    id: 'prod-acc-mlbb',
-    name: 'Akun Mobile Legends: Bang Bang',
-    category: 'games_account',
-    brand: 'Moonton',
-    description: 'Akun MLBB All Unbind, siap push Ranked. Koleksi skin epic/collector langka, emblem max, anti-hackback bergaransi.',
-    // Ikon Logo Asli Mobile Legends
-    imageUrl: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=500&auto=format&fit=crop&q=80',
-    badge: '🛡️ ALL UNBIND 100%',
-    subBadge: '⚡ DIPROSES SETELAH ORDER',
-    soldCount: 890,
-    stockLeft: 6,
-    isPopular: true,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Data login Moonton + Email login akan dikirim langsung ke WhatsApp Anda beserta panduan ganti sandi dan amankan akun.',
-    deliveryType: 'manual_30m',
+    id: 'mlbb-diamonds',
+    title: 'Mobile Legends: Bang Bang',
+    subtitle: 'Top Up Diamond MLBB Murah, Cepat, & Legal 100%',
+    category: 'VOUCHERS',
+    description: 'Top up Diamond Mobile Legends termurah hanya butuh User ID & Zone ID. Bebas ban, aman, dan langsung masuk dalam waktu 1-3 menit.',
+    price: 14500,
+    originalPrice: 18000,
+    image: 'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=1200&auto=format&fit=crop&q=80',
+    stock: 999,
+    salesCount: 12450,
+    rating: 5.0,
+    badge: 'PROSES 1 MENIT',
+    processType: 'AUTO',
     variants: [
-      { id: 'ml-smurf', name: 'Akun Smurf Mythic (Skin 40+, Hero 65+, Emblem Max)', price: 75000, originalPrice: 110000, stock: 4 },
-      { id: 'ml-epic-bundle', name: 'Akun Sultan Medium (Skin 120+, 3 Epic Limited, Winrate 60%+)', price: 185000, originalPrice: 275000, stock: 2 },
-      { id: 'ml-collector', name: 'Akun Sultan High (Skin 250+, 2 Collector, 5 Lightborn, All Unbind)', price: 450000, originalPrice: 650000, stock: 1 }
+      { id: 'ml-86', name: '86 Diamonds (77 + 9 Bonus)', price: 19500, stock: 99, duration: 'Instant' },
+      { id: 'ml-172', name: '172 Diamonds', price: 38500, stock: 99, duration: 'Instant' },
+      { id: 'ml-257', name: '257 Diamonds (234 + 23 Bonus)', price: 57000, stock: 99, duration: 'Instant' },
+      { id: 'ml-706', name: '706 Diamonds (625 + 81 Bonus)', price: 155000, stock: 99, duration: 'Instant' },
+      { id: 'ml-pass', name: 'Weekly Diamond Pass (WDP)', price: 275000, stock: 99, duration: 'Instant' }
+    ],
+    instructions: [
+      'Masukkan User ID dan Zone ID di kolom catatan/form (Contoh: 12345678 (2109)).',
+      'Diamond akan langsung masuk ke mailbox / balance game secara otomatis.'
     ]
   },
   {
-    id: 'prod-acc-ff',
-    name: 'Akun Free Fire (FF)',
-    category: 'games_account',
-    brand: 'Garena',
-    description: 'Akun Free Fire Old Season, bundle bandit/artic blue langka, evo gun level tinggi, login Google/VK aman dan full akses.',
-    // Ikon Logo Asli Free Fire
-    imageUrl: 'https://images.unsplash.com/photo-1511512578047-dfb367046420?w=500&auto=format&fit=crop&q=80',
-    badge: '🛡️ GARANSI AKUN',
-    subBadge: '⚡ DIPROSES SETELAH ORDER',
-    soldCount: 650,
-    stockLeft: 4,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Kredensial dan data pemulihan diserahkan full akses.',
-    deliveryType: 'manual_30m',
+    id: 'freefire-diamonds',
+    title: 'Free Fire Diamonds',
+    subtitle: 'Top Up FF Instant Kirim Cukup ID Player',
+    category: 'VOUCHERS',
+    description: 'Top up Diamond Free Fire resmi dan legal. Proses sekilat kilat cukup memasukkan Player ID Free Fire Kakak.',
+    price: 10000,
+    originalPrice: 15000,
+    image: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=1200&auto=format&fit=crop&q=80',
+    stock: 999,
+    salesCount: 9810,
+    rating: 4.9,
+    badge: 'KILAT',
+    processType: 'AUTO',
     variants: [
-      { id: 'ff-starter', name: 'Akun FF Old Season 8 (Bundle Rapi, Siap Ranked)', price: 65000, originalPrice: 90000, stock: 3 },
-      { id: 'ff-evo-gun', name: 'Akun FF Evo Gun Max (AK Naga / MP40 Cobra Lv Max)', price: 230000, originalPrice: 320000, stock: 1 }
+      { id: 'ff-100', name: '100 Diamonds', price: 14000, stock: 99, duration: 'Instant' },
+      { id: 'ff-355', name: '355 Diamonds', price: 47000, stock: 99, duration: 'Instant' },
+      { id: 'ff-720', name: '720 Diamonds', price: 92000, stock: 99, duration: 'Instant' },
+      { id: 'ff-membership', name: 'Member Mingguan Free Fire', price: 28000, stock: 99, duration: 'Instant' }
+    ],
+    instructions: [
+      'Masukkan Player ID Free Fire Kakak dengan benar.',
+      'Proses otomatis 1-5 menit 24 Jam nonstop.'
     ]
   },
   {
-    id: 'prod-acc-roblox',
-    name: 'Akun Roblox Aged / Loaded',
-    category: 'games_account',
-    brand: 'Roblox Corp',
-    description: 'Akun Roblox berumur (Old 2018-2021) belum pernah verifikasi email (Clean), siap pakai dengan avatar accessories langka.',
-    // Ikon Logo Asli Roblox
-    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80',
-    badge: '🚀 PROSES ±10 MENIT',
-    subBadge: '⚡ DIPROSES SETELAH ORDER',
-    soldCount: 740,
-    stockLeft: 12,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Akun belum diverifikasi email atau nomor HP. Anda bisa langsung menautkan email dan mengamankan akun sendiri.',
-    deliveryType: 'manual_30m',
+    id: 'roblox-robux',
+    title: 'Roblox Robux Instant / Via Gamepass',
+    subtitle: 'Robux Legal & Safe 100% Untuk Avatar & Game Items',
+    category: 'VOUCHERS',
+    description: 'Beli Robux murah aman bebas kontroversi. Tersedia pengiriman instan via gift card / log-in atau via Gamepass Roblox.',
+    price: 35000,
+    originalPrice: 50000,
+    image: 'https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1560253023-3ec5d502959f?w=1200&auto=format&fit=crop&q=80',
+    stock: 50,
+    salesCount: 2150,
+    rating: 4.9,
+    badge: 'POPULER',
+    processType: 'MANUAL',
     variants: [
-      { id: 'rbx-clean-aged', name: 'Akun Roblox Clean Aged 2019+ (Inventory Starter)', price: 35000, originalPrice: 50000, stock: 12 },
-      { id: 'rbx-1000-loaded', name: 'Akun Roblox Terisi 1.000 Robux Balance Ready', price: 125000, originalPrice: 170000, stock: 4 }
+      { id: 'rbx-400', name: '400 Robux Clean', price: 68000, stock: 20, duration: '15-30 Mnt' },
+      { id: 'rbx-800', name: '800 Robux Clean', price: 135000, stock: 15, duration: '15-30 Mnt' },
+      { id: 'rbx-1000', name: '1.000 Robux Fast', price: 165000, stock: 10, duration: '15-30 Mnt' }
+    ],
+    instructions: [
+      'Sediakan Username Roblox atau link Gamepass saat memesan.',
+      'Tim admin kami akan memproses transaksi sesuai petunjuk varian.'
     ]
   },
   {
-    id: 'prod-acc-efootball',
-    name: 'Akun eFootball Mobile (PES)',
-    category: 'games_account',
-    brand: 'Konami',
-    description: 'Akun eFootball skuad impian OVR 3150+, bertabur pemain kartu Epic Booster Messi, Neymar, Vieira, dan Gullit.',
-    // Ikon Logo Asli eFootball / PES
-    imageUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&auto=format&fit=crop&q=80',
-    badge: '⚽ KONAMI ID BERSIH',
-    subBadge: '⚡ DIPROSES SETELAH ORDER',
-    soldCount: 520,
-    stockLeft: 5,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Detail login Konami ID resmi, data email dapat diganti ke email milik pembeli 100%.',
-    deliveryType: 'manual_30m',
+    id: 'efootball-coins',
+    title: 'eFootball Coins (PES Mobile)',
+    subtitle: 'Top Up eFootball Coins iOS & Android Fast Process',
+    category: 'VOUCHERS',
+    description: 'Dapatkan eFootball Coins untuk gacha pemain Legend, Epic, dan Match Pass terbaru di eFootball Mobile.',
+    price: 16000,
+    originalPrice: 22000,
+    image: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1579952363873-27f3bade9f55?w=1200&auto=format&fit=crop&q=80',
+    stock: 40,
+    salesCount: 1640,
+    rating: 4.8,
+    badge: 'PROSES 15 MENIT',
+    processType: 'MANUAL',
     variants: [
-      { id: 'ef-epic-3', name: 'Skuad OVR 3150+ (3 Epic Booster + 1000 Koin)', price: 95000, originalPrice: 140000, stock: 4 },
-      { id: 'ef-sultan-gullit', name: 'Skuad Sultan OVR 3180+ (Gullit Booster + Vieira + Big Time Messi)', price: 290000, originalPrice: 400000, stock: 1 }
-    ]
-  },
-
-  // C. Top Up Game
-  {
-    id: 'prod-topup-mlbb',
-    name: 'Mobile Legends: Bang Bang Diamonds',
-    category: 'topup_game',
-    brand: 'Moonton',
-    description: 'Top up Diamond MLBB resmi via User ID & Zone ID, 100% legal dan anti-minus, masuk dalam hitungan detik 24 jam.',
-    imageUrl: 'https://images.unsplash.com/photo-1538481199705-c710c4e965fc?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ INSTANT 1-3 MENIT',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 15420,
-    stockLeft: 999,
-    isPopular: true,
-    isPromo: true,
-    inStock: true,
-    requiredFields: ['userId', 'zoneId', 'whatsappNumber'],
-    guideText: 'Cara Cek ID: Buka profil akun MLBB Anda di pojok kiri atas. Contoh: ID: 12345678, Server / Zone ID: (1234).',
-    deliveryType: 'instant',
-    variants: [
-      { id: 'ml-wdp', name: 'Weekly Diamond Pass (WDP)', price: 27500, originalPrice: 32000, stock: 999 },
-      { id: 'ml-86', name: '86 Diamonds (78 + 8 Bonus)', price: 20500, originalPrice: 24000, stock: 999 },
-      { id: 'ml-172', name: '172 Diamonds (156 + 16 Bonus)', price: 41000, originalPrice: 48000, stock: 999 },
-      { id: 'ml-257', name: '257 Diamonds (234 + 23 Bonus)', price: 61000, originalPrice: 70000, stock: 999 },
-      { id: 'ml-706', name: '706 Diamonds (625 + 81 Bonus)', price: 164000, originalPrice: 185000, stock: 999 },
-      { id: 'ml-2195', name: '2195 Diamonds (1860 + 335 Bonus)', price: 495000, originalPrice: 560000, stock: 999 }
-    ]
-  },
-  {
-    id: 'prod-topup-ff',
-    name: 'Free Fire Diamonds',
-    category: 'topup_game',
-    brand: 'Garena',
-    description: 'Top up Diamond Free Fire resmi cepat dan aman hanya butuh User ID FF. Otomatis masuk tanpa login.',
-    imageUrl: 'https://images.unsplash.com/photo-1563089145-599997674d42?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ INSTANT 1 MENIT',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 9810,
-    stockLeft: 999,
-    isPopular: true,
-    inStock: true,
-    requiredFields: ['userId', 'whatsappNumber'],
-    guideText: 'Cara Cek ID FF: Masuk ke profil akun Free Fire Anda, salin nomor User ID (UID) di bawah nama karakter.',
-    deliveryType: 'instant',
-    variants: [
-      { id: 'ff-mem-w', name: 'Membership Mingguan (Weekly)', price: 29000, originalPrice: 35000, stock: 999 },
-      { id: 'ff-mem-m', name: 'Membership Bulanan (Monthly)', price: 115000, originalPrice: 135000, stock: 999 },
-      { id: 'ff-70', name: '70 Diamonds', price: 9500, originalPrice: 12000, stock: 999 },
-      { id: 'ff-140', name: '140 Diamonds', price: 18800, originalPrice: 23000, stock: 999 },
-      { id: 'ff-355', name: '355 Diamonds', price: 46500, originalPrice: 55000, stock: 999 },
-      { id: 'ff-720', name: '720 Diamonds', price: 92000, originalPrice: 105000, stock: 999 }
-    ]
-  },
-  {
-    id: 'prod-topup-roblox',
-    name: 'Roblox Robux Resmi',
-    category: 'topup_game',
-    brand: 'Roblox Corp',
-    description: 'Isi saldo Robux resmi dan aman via Gamepass / Group Funds. Rate murah, proses dipandu hingga masuk.',
-    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ RATE TERMURAH',
-    subBadge: '⚡ DIPROSES SETELAH ORDER',
-    soldCount: 6310,
-    stockLeft: 999,
-    inStock: true,
-    requiredFields: ['userId', 'whatsappNumber'],
-    guideText: 'Masukkan Username Roblox Anda. Pastikan gamepass sudah diset sesuai nominal Robux yang dipilih.',
-    deliveryType: 'instant',
-    variants: [
-      { id: 'rbx-100', name: '100 Robux Fast', price: 14000, originalPrice: 20000, stock: 999 },
-      { id: 'rbx-400', name: '400 Robux Fast Delivery', price: 54000, originalPrice: 70000, stock: 999 },
-      { id: 'rbx-800', name: '800 Robux Super Hemat', price: 105000, originalPrice: 135000, stock: 999 },
-      { id: 'rbx-1700', name: '1.700 Robux Paket Sultan', price: 218000, originalPrice: 275000, stock: 999 }
-    ]
-  },
-  {
-    id: 'prod-topup-efootball',
-    name: 'eFootball Coins Resmi',
-    category: 'topup_game',
-    brand: 'Konami',
-    description: 'Top up eFootball Coins untuk gacha Epic Booster Player. Proses cepat hanya via Konami ID / Akun login.',
-    imageUrl: 'https://images.unsplash.com/photo-1508098682722-e99c43a406b2?w=500&auto=format&fit=crop&q=80',
-    badge: '🚀 PROSES ±10 MENIT',
-    subBadge: '⚡ DIPROSES SETELAH ORDER',
-    soldCount: 3820,
-    stockLeft: 999,
-    inStock: true,
-    requiredFields: ['userId', 'whatsappNumber'],
-    guideText: 'Masukkan ID Pemilik eFootball Anda (atau Konami Linked ID).',
-    deliveryType: 'manual_30m',
-    variants: [
-      { id: 'ef-coin-130', name: '130 eFootball Coins', price: 17000, originalPrice: 22000, stock: 999 },
-      { id: 'ef-coin-550', name: '550 eFootball Coins', price: 72000, originalPrice: 85000, stock: 999 },
-      { id: 'ef-coin-1050', name: '1050 eFootball Coins', price: 138000, originalPrice: 160000, stock: 999 },
-      { id: 'ef-coin-2130', name: '2130 eFootball Coins', price: 272000, originalPrice: 310000, stock: 999 }
+      { id: 'ef-130', name: '130 eFootball Coins', price: 16000, stock: 20, duration: '15 Mnt' },
+      { id: 'ef-550', name: '550 eFootball Coins', price: 65000, stock: 15, duration: '15 Mnt' },
+      { id: 'ef-1040', name: '1.040 eFootball Coins', price: 125000, stock: 5, duration: '15 Mnt' }
+    ],
+    instructions: [
+      'Gunakan Konami ID atau login Google Play / Game Center yang terhubung.',
+      'Admin akan membantu proses top up secara langsung.'
     ]
   },
 
-  // D. Pulsa dan Paket Data
+  // ----------------------------------------------------
+  // 3. UTILITAS & PULSA / E-MONEY / GIFT CARD
+  // ----------------------------------------------------
   {
-    id: 'prod-telkomsel',
-    name: 'Telkomsel Pulsa & Paket Data',
-    category: 'pulsa_data',
-    brand: 'Telkomsel',
-    description: 'Isi ulang pulsa reguler Telkomsel (SimPATI, As, Halo, By.U) dan paket InternetMAX / OMG! tercepat 24 jam.',
-    imageUrl: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ SN REALTIME 30 DETIK',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 11200,
-    stockLeft: 999,
-    isPopular: true,
-    inStock: true,
-    requiredFields: ['phoneNumber', 'whatsappNumber'],
-    guideText: 'Prefix Telkomsel: 0811, 0812, 0813, 0821, 0822, 0823, 0851, 0852, 0853. Pastikan nomor dalam masa aktif.',
-    deliveryType: 'instant',
+    id: 'pulsa-all-operator',
+    title: 'Pulsa All Operator Indonesia',
+    subtitle: 'Telkomsel, Indosat, XL, Tri, Smartfren, Axis',
+    category: 'SOFTWARE',
+    description: 'Isi ulang pulsa reguler semua operator seluler Indonesia. Pengisian cepat otomatis hitungan detik.',
+    price: 10500,
+    originalPrice: 12000,
+    image: 'https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1556742049-0a67daf4005a?w=1200&auto=format&fit=crop&q=80',
+    stock: 999,
+    salesCount: 15400,
+    rating: 5.0,
+    badge: 'OTOMATIS 24 JAM',
+    processType: 'AUTO',
     variants: [
-      { id: 'tsel-p10', name: 'Pulsa Reguler 10.000', price: 10850, originalPrice: 12000, stock: 999 },
-      { id: 'tsel-p25', name: 'Pulsa Reguler 25.000', price: 25400, originalPrice: 27000, stock: 999 },
-      { id: 'tsel-p50', name: 'Pulsa Reguler 50.000', price: 49900, originalPrice: 52000, stock: 999 },
-      { id: 'tsel-p100', name: 'Pulsa Reguler 100.000', price: 98500, originalPrice: 102000, stock: 999 },
-      { id: 'tsel-d14gb', name: 'InternetMAX 14 GB (30 Hari Full 24 Jam)', price: 44000, originalPrice: 55000, stock: 999 },
-      { id: 'tsel-d35gb', name: 'InternetMAX 35 GB (30 Hari Full Kuota Utama)', price: 88000, originalPrice: 105000, stock: 999 }
+      { id: 'pls-10k', name: 'Pulsa Rp 10.000', price: 10800, stock: 999, duration: 'Detik' },
+      { id: 'pls-25k', name: 'Pulsa Rp 25.000', price: 25800, stock: 999, duration: 'Detik' },
+      { id: 'pls-50k', name: 'Pulsa Rp 50.000', price: 50500, stock: 999, duration: 'Detik' },
+      { id: 'pls-100k', name: 'Pulsa Rp 100.000', price: 99000, stock: 999, duration: 'Detik' }
+    ],
+    instructions: [
+      'Masukkan nomor HP penerima pulsa di kolom catatan/tujuan.',
+      'Pastikan nomor HP masih dalam masa aktif.'
     ]
   },
   {
-    id: 'prod-indosat',
-    name: 'Indosat Ooredoo IM3 Pulsa & Data',
-    category: 'pulsa_data',
-    brand: 'Indosat',
-    description: 'Pulsa reguler dan kuota Freedom Internet Indosat IM3 murni 24 jam tanpa pembagian zona waktu.',
-    imageUrl: 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ SN REALTIME 30 DETIK',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 8430,
-    stockLeft: 999,
-    inStock: true,
-    requiredFields: ['phoneNumber', 'whatsappNumber'],
-    guideText: 'Prefix Indosat: 0814, 0815, 0816, 0855, 0856, 0857, 0858.',
-    deliveryType: 'instant',
+    id: 'google-play-giftcard',
+    title: 'Google Play Gift Card IDR',
+    subtitle: 'Kode Voucher Resmi Google Play Store Indonesia',
+    category: 'VOUCHERS',
+    description: 'Kode voucher Google Play resmi rupiah untuk pembelian aplikasi, item game, buku, dan film di Google Play Store.',
+    price: 22000,
+    originalPrice: 25000,
+    image: 'https://images.unsplash.com/photo-1556742111-a301076d9d18?w=600&auto=format&fit=crop&q=80',
+    banner: 'https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=1200&auto=format&fit=crop&q=80',
+    stock: 45,
+    salesCount: 3890,
+    rating: 4.9,
+    badge: 'KODE INSTAN',
+    processType: 'AUTO',
     variants: [
-      { id: 'isat-p10', name: 'Pulsa Reguler 10.000', price: 10700, originalPrice: 12000, stock: 999 },
-      { id: 'isat-p25', name: 'Pulsa Reguler 25.000', price: 25200, originalPrice: 27000, stock: 999 },
-      { id: 'isat-p50', name: 'Pulsa Reguler 50.000', price: 49700, originalPrice: 52000, stock: 999 },
-      { id: 'isat-p100', name: 'Pulsa Reguler 100.000', price: 98000, originalPrice: 102000, stock: 999 },
-      { id: 'isat-d10gb', name: 'Freedom Internet 10 GB (30 Hari)', price: 39000, originalPrice: 50000, stock: 999 },
-      { id: 'isat-d25gb', name: 'Freedom Internet 25 GB (30 Hari)', price: 73000, originalPrice: 90000, stock: 999 }
-    ]
-  },
-  {
-    id: 'prod-xl',
-    name: 'XL Axiata Pulsa & Data',
-    category: 'pulsa_data',
-    brand: 'XL',
-    description: 'Pulsa XL reguler dan paket Xtra Combo Flex dengan bonus kuota YouTube/Tiktok/Games.',
-    imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ SN REALTIME 30 DETIK',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 6710,
-    stockLeft: 999,
-    inStock: true,
-    requiredFields: ['phoneNumber', 'whatsappNumber'],
-    guideText: 'Prefix XL: 0817, 0818, 0819, 0859, 0877, 0878.',
-    deliveryType: 'instant',
-    variants: [
-      { id: 'xl-p10', name: 'Pulsa Reguler 10.000', price: 10750, originalPrice: 12000, stock: 999 },
-      { id: 'xl-p25', name: 'Pulsa Reguler 25.000', price: 25250, originalPrice: 27000, stock: 999 },
-      { id: 'xl-p50', name: 'Pulsa Reguler 50.000', price: 49800, originalPrice: 52000, stock: 999 },
-      { id: 'xl-p100', name: 'Pulsa Reguler 100.000', price: 98200, originalPrice: 102000, stock: 999 },
-      { id: 'xl-flex-m', name: 'Xtra Combo Flex M (15 GB + Vidio 30 Hari)', price: 48000, originalPrice: 60000, stock: 999 }
-    ]
-  },
-  {
-    id: 'prod-axis',
-    name: 'AXIS Pulsa & Paket Data',
-    category: 'pulsa_data',
-    brand: 'AXIS',
-    description: 'Pulsa AXIS dan kuota Bronet 24 Jam kuota hemat anak muda, langsung aktif dalam hitungan detik.',
-    imageUrl: 'https://images.unsplash.com/photo-1534972195531-a756b1126f24?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ SN REALTIME 30 DETIK',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 5120,
-    stockLeft: 999,
-    inStock: true,
-    requiredFields: ['phoneNumber', 'whatsappNumber'],
-    guideText: 'Prefix AXIS: 0831, 0832, 0833, 0838.',
-    deliveryType: 'instant',
-    variants: [
-      { id: 'ax-p10', name: 'Pulsa Reguler 10.000', price: 10700, originalPrice: 12000, stock: 999 },
-      { id: 'ax-p25', name: 'Pulsa Reguler 25.000', price: 25150, originalPrice: 27000, stock: 999 },
-      { id: 'ax-p50', name: 'Pulsa Reguler 50.000', price: 49650, originalPrice: 52000, stock: 999 },
-      { id: 'ax-bro-12gb', name: 'Bronet 24 Jam 12 GB (30 Hari)', price: 38500, originalPrice: 48000, stock: 999 }
-    ]
-  },
-  {
-    id: 'prod-tri',
-    name: 'Tri (3) Indonesia Pulsa & Data',
-    category: 'pulsa_data',
-    brand: 'Tri',
-    description: 'Pulsa Tri reguler dan kuota AlwaysOn (AON) masa aktif selamanya mengikuti masa aktif kartu sim.',
-    imageUrl: 'https://images.unsplash.com/photo-1512428559087-560fa5ceab42?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ SN REALTIME 30 DETIK',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 4320,
-    stockLeft: 999,
-    inStock: true,
-    requiredFields: ['phoneNumber', 'whatsappNumber'],
-    guideText: 'Prefix Tri: 0895, 0896, 0897, 0898, 0899.',
-    deliveryType: 'instant',
-    variants: [
-      { id: 'tri-p10', name: 'Pulsa Reguler 10.000', price: 10700, originalPrice: 12000, stock: 999 },
-      { id: 'tri-p25', name: 'Pulsa Reguler 25.000', price: 25100, originalPrice: 27000, stock: 999 },
-      { id: 'tri-p50', name: 'Pulsa Reguler 50.000', price: 49600, originalPrice: 52000, stock: 999 },
-      { id: 'tri-aon-16gb', name: 'AON (AlwaysOn) 16 GB Kuota Bebas', price: 47000, originalPrice: 60000, stock: 999 }
-    ]
-  },
-  {
-    id: 'prod-smartfren',
-    name: 'Smartfren Pulsa & Data',
-    category: 'pulsa_data',
-    brand: 'Smartfren',
-    description: 'Pulsa Smartfren dan Kuota Unlimited Nonstop bebas FUP dengan sinyal 4G/5G stabil.',
-    imageUrl: 'https://images.unsplash.com/photo-1557804506-669a67965ba0?w=500&auto=format&fit=crop&q=80',
-    badge: '⚡ SN REALTIME 30 DETIK',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 3890,
-    stockLeft: 999,
-    inStock: true,
-    requiredFields: ['phoneNumber', 'whatsappNumber'],
-    guideText: 'Prefix Smartfren: 0881, 0882, 0883, 0884, 0885, 0886, 0887, 0888, 0889.',
-    deliveryType: 'instant',
-    variants: [
-      { id: 'sm-p10', name: 'Pulsa Reguler 10.000', price: 10750, originalPrice: 12000, stock: 999 },
-      { id: 'sm-p25', name: 'Pulsa Reguler 25.000', price: 25200, originalPrice: 27000, stock: 999 },
-      { id: 'sm-p50', name: 'Pulsa Reguler 50.000', price: 49700, originalPrice: 52000, stock: 999 },
-      { id: 'sm-unlimited', name: 'Unlimited Nonstop 12 GB + Akses Unlimited', price: 45000, originalPrice: 55000, stock: 999 }
-    ]
-  },
-
-  // E. Gift Card
-  {
-    id: 'prod-gc-roblox',
-    name: 'Roblox Digital Gift Card (PIN Code)',
-    category: 'gift_card',
-    brand: 'Roblox Corp',
-    description: 'Kode voucher resmi Roblox untuk ditukarkan ke Robux atau langganan Roblox Premium di roblox.com/redeem.',
-    imageUrl: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=500&auto=format&fit=crop&q=80',
-    badge: '🎁 KODE VOUCHER INSTAN',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 4890,
-    stockLeft: 25,
-    isPopular: true,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Kode PIN digital langsung terbit di halaman invoice dan dikirimkan ke WhatsApp & Email Anda.',
-    deliveryType: 'voucher_code',
-    variants: [
-      { id: 'gc-rbx-10usd', name: 'Roblox Gift Card $10 USD (800 Robux + Bonus)', price: 160000, originalPrice: 180000, stock: 25 },
-      { id: 'gc-rbx-25usd', name: 'Roblox Gift Card $25 USD (2.000 Robux)', price: 395000, originalPrice: 440000, stock: 15 },
-      { id: 'gc-rbx-100idr', name: 'Roblox Gift Card IDR 100.000 Resmi', price: 104000, originalPrice: 115000, stock: 30 }
-    ]
-  },
-  {
-    id: 'prod-gc-googleplay',
-    name: 'Google Play Gift Card Indonesia',
-    category: 'gift_card',
-    brand: 'Google Play',
-    description: 'Voucher saldo resmi Google Play IDR untuk beli diamond game, aplikasi, dan langganan di Google Play Store.',
-    imageUrl: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=500&auto=format&fit=crop&q=80',
-    badge: '🎁 KODE RESMI PLAY STORE',
-    subBadge: '🚀 BAYAR LANGSUNG KIRIM',
-    soldCount: 3950,
-    stockLeft: 40,
-    inStock: true,
-    requiredFields: ['whatsappNumber', 'email'],
-    guideText: 'Kode voucher 16 digit untuk diredeem di aplikasi Play Store > Pembayaran & Langganan > Tukarkan Kode.',
-    deliveryType: 'voucher_code',
-    variants: [
-      { id: 'gp-20k', name: 'Google Play IDR 20.000', price: 21500, originalPrice: 25000, stock: 50 },
-      { id: 'gp-50k', name: 'Google Play IDR 50.000', price: 52500, originalPrice: 58000, stock: 40 },
-      { id: 'gp-100k', name: 'Google Play IDR 100.000', price: 103000, originalPrice: 112000, stock: 35 }
+      { id: 'gpgc-20k', name: 'Voucher Google Play Rp 20.000', price: 22000, stock: 20, duration: 'Instant' },
+      { id: 'gpgc-50k', name: 'Voucher Google Play Rp 50.000', price: 53500, stock: 15, duration: 'Instant' },
+      { id: 'gpgc-100k', name: 'Voucher Google Play Rp 100.000', price: 106000, stock: 10, duration: 'Instant' }
+    ],
+    instructions: [
+      'Kode voucher akan muncul di rincian transaksi setelah pembayaran lunas.',
+      'Redeem kode langsung di Google Play Store (Menu Profile > Pembayaran & Langganan > Tukarkan Kode).'
     ]
   }
 ];
 
 export const INITIAL_COUPONS: Coupon[] = [
   {
-    code: 'YURAAHEMAT',
-    discountType: 'fixed',
-    value: 5000,
-    minPurchase: 25000,
-    validUntil: '2026-12-31',
-    isActive: true
-  },
-  {
-    code: 'FLASHGAME',
-    discountType: 'percent',
-    value: 10,
-    minPurchase: 20000,
+    id: 'c1',
+    code: 'YURAAHEBAT',
+    discountType: 'PERCENTAGE',
+    discountValue: 10,
     maxDiscount: 15000,
-    validUntil: '2026-12-31',
-    isActive: true
+    minPurchase: 20000,
+    usageLimit: 50,
+    usedCount: 12,
+    expiryDate: '2026-12-31'
   },
   {
-    code: 'BARUGABUNG',
-    discountType: 'fixed',
-    value: 3000,
-    minPurchase: 10000,
-    validUntil: '2026-12-31',
-    isActive: true
+    id: 'c2',
+    code: 'HEMAT5K',
+    discountType: 'FIXED',
+    discountValue: 5000,
+    minPurchase: 30000,
+    usageLimit: 100,
+    usedCount: 45,
+    expiryDate: '2026-12-31'
+  },
+  {
+    id: 'c3',
+    code: 'GAMERSEJATI',
+    discountType: 'PERCENTAGE',
+    discountValue: 15,
+    maxDiscount: 20000,
+    minPurchase: 50000,
+    usageLimit: 30,
+    usedCount: 8,
+    expiryDate: '2026-12-31'
   }
 ];
 
 export const INITIAL_SETTINGS: StoreSettings = {
   storeName: 'Yuraa Store id',
-  brandTagline: 'Semua Kebutuhan Digitalmu, Satu Tempat!',
-  whatsappNumber: '628984436849',
+  storeTagline: 'Toko Produk Digital & Top Up Game Terpercaya No.1',
+  adminWhatsapp: '628984436849',
+  announcementText: '⚡ Promo Spesial 2026: Gunakan kode kupon YURAAHEBAT untuk potongan harga s/d Rp 15.000!',
   danaNumber: '628984436849',
-  danaAccountName: 'Yuraa Store id',
-  csHours: '08:00 - 24:00 WIB (24 Jam Otomatis Sistem)',
-  announcement: '⚡ Promo Berkah: Bayar via DANA nomor 628984436849 langsung diproses! Gunakan kode kupon YURAAHEMAT.',
-  paymentGatewayMode: 'demo_simulation',
-  providerApiMode: 'simulation',
-  tripayApiKey: 'DEV-TRIPAY-API-KEY-DEMO',
-  tripayPrivateKey: 'DEV-PRIVATE-KEY-SECRET',
-  tripayMerchantCode: 'T128919',
-  digiflazzUsername: 'yuraastoreid',
-  digiflazzApiKey: 'dev-digiflazz-secret-key',
-  adminPin: 'yuraa123',
-  ownerPin: 'yuraa123',
-  staffPin: 'staff123',
-  promoBanner: {
-    isActive: true,
-    title: '⚡ FLASH SALE BULAN INI: DISKON S.D RP 15.000!',
-    description: 'Beli Viu Drakor, Netflix 4K, Diamond MLBB, dan Robux lebih hemat dengan kode kupon diskon resmi.',
-    couponCode: 'YURAAHEMAT',
-    badgeText: 'PENAWARAN SPESIAL TERBATAS',
-    position: 'top',
-    theme: 'purple_neon',
-    validUntil: 'Berlaku Hari Ini s/d 23:59 WIB',
-    actionText: 'Klaim Diskon & Belanja'
-  }
+  danaName: 'Yuraa Store Official',
+  gopayNumber: '628984436849',
+  gopayName: 'Yuraa Store Official',
+  ovoNumber: '',
+  ovoName: '',
+  qrisImageUrl: 'https://images.unsplash.com/photo-1607604276583-eef5d076aa5f?w=600&auto=format&fit=crop&q=80',
+  bannerImages: [
+    'https://images.unsplash.com/photo-1542751371-adc38448a05e?w=1200&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1574375927938-d5a98e8ffe85?w=1200&auto=format&fit=crop&q=80',
+    'https://images.unsplash.com/photo-1614680376593-902f749f7edc?w=1200&auto=format&fit=crop&q=80'
+  ]
 };
