@@ -1,0 +1,6 @@
+{
+  "name": "Yuraa Store id - Toko Produk Digital, Game & Pulsa",
+  "description": "E-Commerce produk digital profesional: Akun Premium, Top Up Game, Pulsa, Paket Data, dan Gift Card terpercaya dengan proses instan.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
