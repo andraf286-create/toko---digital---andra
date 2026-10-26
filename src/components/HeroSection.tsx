@@ -1,4 +1,6 @@
+
 import React from 'react';
+import mascotImg from '../assets/images/mascot_bear_tiger_hero_1792993941291.jpg';
 import { Sparkles, ArrowRight, ShieldCheck, Zap, MessageSquare } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -95,7 +97,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
                 <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-purple-600/30 via-blue-500/25 to-pink-500/20 blur-2xl -z-10 group-hover:blur-3xl transition-all" />
                 
                 <img
-                  src="/src/assets/images/mascot_bear_tiger_hero_1792993941291.jpg"
+                  src={mascotImg}
                   alt="Maskot Yuraa Store Beruang x Harimau"
                   className="w-full h-full object-contain filter drop-shadow-[0_15px_25px_rgba(0,0,0,0.6)] transform hover:scale-105 transition-transform duration-300 select-none"
                   referrerPolicy="no-referrer"
