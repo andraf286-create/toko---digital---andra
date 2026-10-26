@@ -175,9 +175,11 @@ export const storeService = {
     this.saveProducts(products);
   },
 
-  resetProductsToDefault(): void {
+    resetProductsToDefault(): void {
+    localStorage.removeItem(PRODUCTS_KEY);
     this.saveProducts(INITIAL_PRODUCTS);
   },
+
 
   // SETTINGS
   getSettings(): StoreSettings {
