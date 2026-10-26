@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { SubscriptionReminderNotification } from './components/SubscriptionReminderNotification';
 import { ThemeProvider } from './context/ThemeContext';
 import { Header } from './components/Header';
 import { HeroSection } from './components/HeroSection';
@@ -317,6 +318,14 @@ export default function App() {
           onClose={() => setIsShareOpen(false)}
           storeName={settings.storeName}
         />
+
+                {/* Notifikasi Pengingat Masa Aktif Langganan (Sisa 5 Hari) */}
+        <SubscriptionReminderNotification
+          onRenewOrder={(ord) => {
+            setActiveInvoice(ord);
+          }}
+        />
+
 
       </div>
     </ThemeProvider>
