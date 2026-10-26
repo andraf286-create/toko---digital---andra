@@ -1,13 +1,30 @@
 import { Product, Order, Coupon, StoreSettings, OrderStatus, FulfillmentInfo, AccountCredential, DeletedOrderLog, ArchivedOrder, AdminRole, AdminSession } from '../types';
 import { INITIAL_PRODUCTS, INITIAL_COUPONS, INITIAL_SETTINGS } from '../data/initialData';
 
-const PRODUCTS_KEY = 'yuraa_products_v1';
+const PRODUCTS_KEY = 'yuraa_products_v2';
 const ORDERS_KEY = 'yuraa_orders_v1';
 const COUPONS_KEY = 'yuraa_coupons_v1';
 const SETTINGS_KEY = 'yuraa_settings_v1';
 const ADMIN_AUTH_KEY = 'yuraa_admin_auth';
 const CREDENTIALS_KEY = 'yuraa_credentials_v1';
 const DELETED_ORDERS_KEY = 'yuraa_deleted_orders_v1';
+
+// ... (kode kredensial dan deleted logs biarkan tetap sama)
+
+export const storeService = {
+  // PRODUCTS
+  getProducts(): Product[] {
+    try {
+      const stored = localStorage.getItem(PRODUCTS_KEY);
+      if (stored) {
+        return JSON.parse(stored);
+      }
+    } catch {
+      // fallback
+    }
+    localStorage.setItem(PRODUCTS_KEY, JSON.stringify(INITIAL_PRODUCTS));
+    return INITIAL_PRODUCTS;
+  },
 
 const INITIAL_CREDENTIALS: AccountCredential[] = [
   {
